@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardSQL">
+	<!-- 글쓰기 -->
+	<insert id="boardWrite" parameterType="board">
+		insert into freeboard(
+			seq
+			,subject
+			,ir1
+			,ref
+			,hname)
+		values(
+			seq_freeboard.nextval
+			,#{subject}
+			,#{ir1}
+			,seq_freeboard.currval
+			,#{hname})
+	</insert>
+	
+	<!-- 목록 -->
+	<select id="getBoardList" parameterType="java.util.Map" resultType="board">
+		<!-- select seq,id,name,email,subject,content,ref,lev,step,pseq,reply,hit
+			,to_char(logtime,'YYYY.MM.DD')as logtime from
+		(select rownum rn, tt.* from
+		(select * from board order by ref desc, step asc)tt)
+		where rn between #{startNum} and #{endNum} -->
+		
+		<![CDATA[
+		select seq,subject,ir1,ref,lev,step,pseq,reply,hit
+			,to_char(logtime,'YYYY.MM.DD')as logtime,hname 
+			from(select rownum rn, tt.* from
+		(select * from freeboard order by ref desc, step asc)tt)
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- 총글수 -->
+	<select id="getTotalArticle" resultType="int">
+		select count(*) from freeboard
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="hitUpdate" parameterType="int">
+		update freeboard set hit=hit+1 where seq=#{seq}
+	</update>
+	
+	<!-- search -->
+	<select id="boardSearch" parameterType="java.util.Map"
+		resultType="board">
+		<![CDATA[
+		select seq,subject,ir1,ref,lev,step,pseq,reply,hit
+			,to_char(logtime,'YYYY.MM.DD')as logtime,hname 
+			from(select rownum rn, tt.* from
+		(select * from freeboard where ${type} like '%'||#{value}||'%' order by ref desc, step asc)tt)
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	<!-- search total article -->
+	<select id="getTotalSearchArticle" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from freeboard where ${type} like
+		'%'||#{value}||'%'
+	</select>
+	
+
+	
+	<!-- 추천펜션 -->
+	<select id="getRecommandBoard" resultType="recommand">
+		select * from main_recommand
+	</select>
+	
+	
+	
+	
+	<!-- 메인컨테이너 쪽 100개 가져오기>>seq 값 처음에 가져와야해서 -->
+	<select id="getMainInfo" resultType="board.bean.mainListDTO">
+	select distinct(package_product.package_seq),hotel.hotel_name,hotel.hotel_name_eng,hotel_grade,hotel.hotel_floors_rooms,hotel.hotel_location_lat,hotel.hotel_location_long,
+		hotel.hotel_address, hotel.hotel_homepage,hotel.hotel_transportation,hotel.hotel_facilities,hotel.hotel_introduce,hotel.hotel_image0,
+		hotel.hotel_image1,hotel.hotel_image2,hotel.hotel_telnum,hotel.hotel_faxnum,
+		employee_code,
+	    employees.employee_image,
+	    employees.employee_name,
+	    employees.phonenum,
+	    employees.email1,
+	    employees.email2,
+		package_product.package_code,
+		PACKAGE_PRODUCT.NOTANDUM_IMAGE,
+	    package_product.schdule_image,
+	    package_product.package_image0,
+	    package_product.package_image1,
+		package_product.package_image2,
+	    package_product.package_image3,
+	    package_product.package_name,
+	    package_product.package_price
+	from PACKAGE_PRODUCT
+	join hotel using(hotel_grade)
+	join employees using(employee_code)
+	where hotel.hotel_name=package_product.hotel_name
+	order by package_seq asc
+	</select>
+	
+	<!-- Container용 boardList -->
+   <select id="getCboardList" resultType="board">
+      select * from freeboard order by seq desc
+   </select>
+   
+   <!--detailboard 진입 후 정보 추출 -->
+<select id="getDetailInfo" parameterType="String" resultType="board.bean.mainListDTO">
+	select distinct(package_product.package_seq),hotel.hotel_name,hotel.hotel_name_eng,hotel_grade,hotel.hotel_floors_rooms,hotel.hotel_location_lat,hotel.hotel_location_long,
+		hotel.hotel_address, hotel.hotel_homepage,hotel.hotel_transportation,hotel.hotel_facilities,hotel.hotel_introduce,hotel.hotel_image0,
+		hotel.hotel_image1,hotel.hotel_image2,hotel.hotel_telnum,hotel.hotel_faxnum,
+		employee_code,
+	    employees.employee_image,
+	    employees.employee_name,
+	    employees.phonenum,
+	    employees.email1,
+	    employees.email2,
+		package_product.package_code,
+		PACKAGE_PRODUCT.NOTANDUM_IMAGE,
+	    package_product.schdule_image,
+	    package_product.package_image0,
+	    package_product.package_image1,
+		package_product.package_image2,
+	    package_product.package_image3,
+	    package_product.package_name,
+	    package_product.package_price
+	from PACKAGE_PRODUCT
+	join hotel using(hotel_grade)
+	join employees using(employee_code)
+	where hotel.hotel_name=package_product.hotel_name and package_seq=#{package_seq}
+	order by package_seq asc
+	</select>
+	
+	<!-- 검색 결과  뿌리기-->
+	<select id="getSearch" parameterType="java.util.Map" resultType="board.bean.mainListDTO">
+	<![CDATA[
+	select distinct(package_product.package_seq),hotel.hotel_name,hotel.hotel_name_eng,hotel_grade,hotel.hotel_floors_rooms,hotel.hotel_location_lat,hotel.hotel_location_long,
+		hotel.hotel_address, hotel.hotel_homepage,hotel.hotel_transportation,hotel.hotel_facilities,hotel.hotel_introduce,hotel.hotel_image0,
+		hotel.hotel_image1,hotel.hotel_image2,hotel.hotel_telnum,hotel.hotel_faxnum,
+		employee_code,employees.employee_image, employees.employee_name,
+	    employees.phonenum, employees.email1,employees.email2,
+		package_product.package_code,PACKAGE_PRODUCT.NOTANDUM_IMAGE,
+	    package_product.schdule_image,
+	    package_product.package_image0,
+	    package_product.package_image1,
+		package_product.package_image2,
+	    package_product.package_image3,
+	    package_product.package_name,
+		package_product.package_price,
+	from PACKAGE_PRODUCT
+	join hotel using(hotel_grade)
+	join employees using(employee_code)
+	where hotel.hotel_name=package_product.hotel_name
+	 and ${schSel} like '%'||#{schText}||'%'
+	 order by package_seq asc
+	]]>
+	</select>
+	
+	<!-- 1~5성급  -->
+	<select id="getFirstGrade" parameterType="String" resultType="board.bean.mainListDTO">
+		select * from hotel where hotel_grade=#{firstGrade} order by hotel_grade asc	
+	</select>
+	
+	<select id="getTwoGrade" parameterType="String" resultType="board.bean.mainListDTO">
+		select * from hotel where hotel_grade=#{twoGrade} order by hotel_grade asc	
+	</select>
+	
+	<select id="geThreeGrade" parameterType="String" resultType="board.bean.mainListDTO">
+		select * from hotel where hotel_grade=#{threeGrade} order by hotel_grade asc	
+	</select>
+	
+	<select id="getFourGrade" parameterType="String" resultType="board.bean.mainListDTO">
+		select * from hotel where hotel_grade=#{fourGrade} order by hotel_grade asc	
+	</select>
+	
+		<select id="getFiveGrade" parameterType="String" resultType="board.bean.mainListDTO">
+		select * from hotel where hotel_grade=#{fiveGrade} order by hotel_grade asc	
+	</select>
+	
+		<!-- Q&A -->
+	<insert id="qnaboardWrite" parameterType="qna">
+		insert into qnaboard(
+		seq
+		,subject
+		,ir1
+		,ref
+		,hname)
+		values(
+		seq_qnaboard.nextval
+		,#{subject}
+		,#{ir1}
+		,seq_qnaboard.currval
+		,#{hname})
+	</insert>
+	
+	<!-- Q&A list -->
+	<select id="getQnaBoardList" parameterType="java.util.Map" resultType="qna">
+		<![CDATA[
+		select seq,subject,ir1,ref,lev,step,pseq,reply,hit
+			,to_char(logtime,'YYYY.MM.DD')as logtime,hname 
+			from(select rownum rn, tt.* from
+		(select * from qnaboard order by ref desc, step asc)tt)
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- Q&A 총글수 -->
+	<select id="getQnaTotalArticle" resultType="int">
+		select count(*) from qnaboard
+	</select>
+	
+	<!-- Notice list -->
+	<select id="getNoticeBoardList" parameterType="java.util.Map" resultType="notice">
+		<![CDATA[
+		select notice_seq,subject,content,to_char(logtime,'YYYY.MM.DD') as logtime
+			from(select rownum rn, tt.* from
+		(select * from notice order by notice_seq desc)tt)
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- Notice 총글수 -->
+	<select id="getNoticeTotalArticle" resultType="int">
+		select count(*) from notice
+	</select>
+	
+	
+	<!-- 1~5성급 개수 -->
+	<select id="getFirst" parameterType="String" resultType="int">
+		select count(*) from hotel where hotel_grade=#{firstGrade}
+	</select>
+	
+	<select id="getTwo" parameterType="String" resultType="int">
+		select count(*) from hotel where hotel_grade=#{twoGrade}
+	</select>
+	
+	<select id="getThree" parameterType="String" resultType="int">
+		select count(*) from hotel where hotel_grade=#{threeGrade}
+	</select>
+	
+	<select id="getFour" parameterType="String" resultType="int">
+		select count(*) from hotel where hotel_grade=#{fourGrade}
+	</select>
+	
+	<select id="getFive" parameterType="String" resultType="int">
+		select count(*) from hotel where hotel_grade=#{fiveGrade}
+	</select>
+	
+	<select id="getRownumber" resultType="int">
+		select count(*) from freeboard where seq>=0
+	</select>
+	
+	<!-- 목록 -->
+   <select id="getHitBoardList" parameterType="java.util.Map" resultType="board">
+      <![CDATA[
+      select seq,subject,ir1,ref,lev,step,pseq,reply,hit
+         ,to_char(logtime,'YYYY.MM.DD')as logtime,hname 
+         from(select rownum rn, tt.* from
+      (select * from freeboard order by hit desc)tt)
+      where rn>=#{startNum} and rn<=#{endNum}
+      ]]>
+   </select>
+   
+   
+   <!-- 자유게시판 업데이트 -->
+	<update id="freeReply" parameterType="java.util.Map">
+		update freeboard set content=#{content} where seq=#{seq}
+	</update>
+	
+	<select id="getFreeBoard" parameterType="int" resultType="board">
+		select * from freeboard where seq=#{seq}
+	</select>
+	
+	<!-- reply update -->
+	   <select id="getReplyList" resultType="board">
+		select * from freeboard order by seq desc
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

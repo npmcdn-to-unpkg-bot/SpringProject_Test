@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+.yapenGuideHead .headLayer a img { cursor:pointer; }
+.yapenGuideHead .headLayer .schTextBar { float:right; border-bottom:1px solid #ddd; padding:5px 0px; height:40px; }
+.yapenGuideHead .headLayer .schTextBar img { position:relative; top:130px; cursor:pointer; }
+.yapenGuideHead .headLayer .schTextBar input[type=text] { border:0px; font-size:14px; height:40px; position:relative; text-align:left; padding-left:10px; }
+            
+.faq{border-bottom:1px solid #ddd;font-size:12px}
+.faq .hgroup{position:relative;margin:0 0 10px 0;*zoom:1}
+.faq .hgroup .trigger{overflow:visible;position:absolute;top:50%;right:0;margin:-7px 0 0 0;padding:0;border:0;background:none;font-size:12px;cursor:pointer}
+.faq ul{margin:0;padding:0;list-style:none}
+.faq .q{margin:0;border-top:1px solid #ddd}
+.faq .q a.trigger{display:block;padding:10px 15px;background:#fafafa;font-weight:bold;color:#333;text-align:left;text-decoration:none !important}
+.faq .hide .q a.trigger{font-weight:normal;background:none}
+.faq .q a.trigger:hover,
+.faq .q a.trigger:active,
+.faq .q a.trigger:focus{background:#f8f8f8;color:#000}
+.faq .a{margin:0;padding:10px 15px;line-height:1.5}
+
+.a_ct .info {margin:20px 20px 20px 0;padding:10px;border:1px dotted #dcdcdc;}
+.q_ct {text-align:left;padding-left:10px;}
+
+.navi{
+   position: fixed;
+    margin: 0px;
+    padding: 0px;
+    top: 10px;
+    left: 0px;
+    list-style: none;
+    z-index:9999;
+   }    
+   
+   .navi li {
+    width: 100px;
+   }
+   
+   .navi li a{
+    display: block;
+    margin-left: -85px;
+    width: 100px;
+    height: 70px;    
+    background-color:#CFCFCF;
+    background-repeat:no-repeat;
+    background-position:center center;
+    border:1px solid #AFAFAF;
+    -moz-border-radius:0px 10px 10px 0px;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    -moz-box-shadow: 0px 2px 3px #333;
+    -webkit-box-shadow: 0px 2px 3px #333;
+    box-shadow: 0px 2px 3px #333;
+   }
+   
+#totop{ display:scroll; width:70px; height:70px; position: fixed; margin: 0px; padding: 0px; bottom: 100px; right: 50px; list-style: none; z-index:9999; cursor: pointer;opacity: 0.6; } 
+.header{ width:100%; height:200px; background-color:white; position: fixed; z-index: 900; margin-left:-24px; margin-top:0px; }
+.yapenGuideHead {width: 981px; left: 43px; margin-left: 80px; margin-top: 0px;   position:fixed; z-index:901; }
+
+/*  footer */
+.yapenTailLayer { width:1220px; text-align:left; color:#797979; margin:10px auto; font-size:12px; letter-spacing:1.2px; line-height:150%; }
+.yapenTailLayer table { width:100%;}
+.yapenTailLayer a:hover { color:#797979; }
+.yapenTailLayer a:link { color:#797979; }
+.yapenTailLayer a:visited { color:#797979; }
+.destination-pagenate{
+	
+}

@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+.boardWriteForm{
+	margin-left: 15%;
+	margin-right: 12%;
+	margin-top: 5%;
+}
+
+ .boardWriteForm-form{
+position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: left;
+	height:100%;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
+.tipBtn {
+  display: block;
+  width: 425px;
+  height: 43px;
+  margin: 10px auto 0;
+  padding: 0;
+  background:#FF6559;
+  border:1px solid #FF6559;
+  border-radius:3px;
+  font-family:Nanum Gothic;
+  font-size:13px;
+  font-weight:bold;
+  color:#fff;
+  text-indent: 0;
+  text-align:center;
+  line-height:1.5em;
+  overflow: hidden;
+  cursor:pointer
+}
+.tipBtn:hover {
+  background:#FF4337;
+}

@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+#modify_wrap{position: relative; left: 50%; top: 60%; 
+top:10px;
+}
+#modify_sel{position: relative; left: 50%; top: 55%; 
+top:10px;
+}
+
+#modify_total{
+	margin-top:0;
+	margin-left:30%;
+	width:500px;
+	height: 500px;
+	
+}
+
+/* 에러 라벨 처리 */
+#modifyForm label.error {
+      margin-left: 10px;
+      width: auto;
+      display: inline;
+      color : green;
+   }
+   #modifyForm_pw label.error {
+      margin-left: 10px;
+      width: auto;
+      display: inline;
+      color : green;
+   }
+   

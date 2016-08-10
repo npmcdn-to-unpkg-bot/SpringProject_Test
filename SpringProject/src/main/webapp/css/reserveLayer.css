@@ -1,0 +1,132 @@
+@CHARSET "UTF-8";
+.reserveLayer {
+	height: 50px;
+	background-color: #606060;
+	color: #FFF;
+	padding-left: 4px;
+	width: 90%;
+	margin: 0px auto;
+	margin-top:-5%;
+	border-radius: 4px;
+	
+}
+
+.reserveLayer ul {
+	margin-left: 200px;
+	width: 1220px;
+	list-style: none;
+	width: 1220px;
+}
+
+.reserveLayer ul li {
+	float: left;
+	color: #FFF;
+	width: 19%;
+	padding: 6px 12px;
+	border-right: 1px solid #484848;
+	cursor: pointer;
+}
+
+.reserveLayer ul div {
+	float: left;
+	margin-left: 8px;
+	font-size: 16px;
+	color: #FFF;
+	margin-top: 7px;
+}
+
+.reserveLayer ul li .first-li {
+	border-radius: 4px 0px 0px 4px;
+}
+
+.reserveLayer ul li.last-li {
+	border-right: 0px;
+	border-radius: 0px 4px 4px 0px;
+}
+
+.reserveLayer ul li .first-img {
+	float: left;
+	cursor: pointer;
+}
+
+.reserveLayer ul li .last-img {
+	float: right;
+	cursor: pointer;
+	margin: 0px auto;
+	margin-top: 12px;
+}
+
+.reserveLayer ul li .last-li img {
+	float: left;
+	cursor: pointer;
+	margin-top: 0px;
+}
+
+.revLocLayer {
+	background-color: #F5F5F5;
+	width: 1220px;
+	top:15%;
+	margin: 0px auto;
+	border-bottom: 1px solid #606060;
+	color: #333;
+	padding: 10px 0px;
+	display: none;
+	border-radius: 1;
+	position: relative;
+}
+
+.revLocLayer .revLocTbl {
+	width: 98%;
+	margin: 0px auto;
+	margin-top:100px;
+}
+
+.revLocLayer .revLocTbl th {
+	list-style: none;
+	width: 12%;
+	font-size: 14px;
+	padding: 12px 0px;
+	text-align: left;
+	background-color: #FFF;
+	border: 7px solid #F5F5F5;
+	border-radius: 15px;
+}
+
+.revLocLayer .revLocTbl td ul li {
+	list-style: none;
+	border: 1px solid #B8B8B8;
+	float: left;
+	font-size: 13px;
+	padding: 3px 5px;
+	margin: 3px;
+	border-radius: 5px;
+	cursor: pointer;
+	-webkit-transition: 0.4s;
+	-moz-transition: 0.4s;
+	-o-transition: 0.4s;
+	-ms-transition: 0.4s
+}
+
+.yapenHeader .revLocLayer .revLocTbl td ul li:hover {
+	background-color: #FF6559;
+	color: #FFF;
+	border: 1px solid #FF6559;
+}
+.revCalLayer { background-color:#F5F5F5; 
+width:900px; 
+margin-left:20%; 
+top:25%; 
+border-bottom:1px solid #606060; 
+color:#333; 
+padding:20px 0px; 
+display:none; 
+position:relative;
+}
+.revCalLayer .revCalTbl {  width:98%; margin-left: 10%;}
+.revCalLayer .revCalTbl select {border:2px solid #D1D1D1; padding:5px 10px; width:200px; }
+.revCalLayer .revCalTbl th { width:12%; font-size:20px; padding:12px 0px; text-align:center;  background-color:#FFF; border:7px solid #F5F5F5; border-radius:15px; }
+.revCalLayer .revCalTbl td { text-align:left; }
+.slideCloseBtn { margin:0px auto; position:absolute; bottom:0px; cursor:pointer; height:18px; left:630px;}
+.slideCloseBtn2 { margin:0px auto; position:absolute; bottom:0px; cursor:pointer; height:18px; left:630px;}
+
+.mainTip{ width:98%; margin-left: 20%; margin-top: 15%; }

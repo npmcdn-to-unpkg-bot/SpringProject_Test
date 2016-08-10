@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberSQL">
+	<!--중복 아이디 체크  -->
+	<select id="isExistId" parameterType="String" resultType="member">
+		select * from member where id=#{id}
+	</select>
+	
+	<!-- 우편번호 -->
+	<select id="getZipcodeList" parameterType="java.util.Map" resultType="zipcode">
+		select * from newzipcode where sido like '%'||#{sido}||'%' 
+									and sigungu like '%'||#{sigungu}||'%' 
+									and roadname like '%'||#{roadname}||'%'
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="write" parameterType="member">
+		insert into member values(
+			seq_member.nextval
+			,#{hname}
+			,#{firstname}
+			,#{lastname}
+			,#{pwd}
+			,#{country}
+			,#{cellphone}
+			,#{email}
+			,1
+			,seq_email.nextval
+			,'N'
+			,sysdate)
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from member where email=#{email} and pwd=#{pwd}	
+	</select>
+	
+	<!-- 이메일 인증 여부 체크-->
+	<select id="emailAut" parameterType="String" resultType="member">
+		select * from member where email=#{email}	
+	</select>
+	
+	<!-- 회원정보 업데이트 -->
+	<update id="modify" parameterType="java.util.Map">
+		update member set hname=#{hname},firstname=#{firstname},lastname=#{lastname},cellphone=#{cellphone}
+		where email like #{email}
+	</update>
+	
+	<!-- 업데이트 후 정보 세션다시 저장 -->
+	<select id="ModifyAfterMember" parameterType="String" resultType="member">
+		select * from member where hname=#{hname}
+   	</select>
+   	
+   	
+   	<!-- 비밀번호 업데이트 -->
+   	<update id="repwd" parameterType="java.util.Map">
+		update member set pwd=#{newpwd} where email=#{email}
+	</update>
+	
+	<!-- id로 키값 불러오기 -->
+	<select id="selectKey" parameterType="String" resultType="member">
+		select * from member where emailaut=#{email}
+	</select>
+	
+	<!-- 키값 업데이트하기 -->
+	<update id="insertKey" parameterType="String">
+		update member set emailaut='0' where emailaut=#{emailaut}
+	</update>
+   	
+</mapper>
