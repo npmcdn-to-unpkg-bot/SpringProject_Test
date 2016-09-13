@@ -47,7 +47,7 @@
 <script type="text/javascript" src="../jquery/lib/jquery.maskedinput.js"></script>
 <script type="text/javascript" src="../jquery/lib/jquery.validate.js"></script>
 <script type="text/javascript" src="../jquery/lib/jquery.mockjax.js"></script>
-<script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
+<script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
 <script type="text/javascript" src="../jquery/lib/jquery.smartPop.js"></script>
 <script type="text/javascript" src="../jquery/lib/jquery.validate.js"></script>
 <script type="text/javascript" src="../jquery/lib/messages_ko.min.js"></script>
